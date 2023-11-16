@@ -38,3 +38,8 @@ body {
   font-weight: var(--fw-light);
   background-color: var(--colors-bg);
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
