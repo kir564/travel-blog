@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { IoMoon, IoMoonOutline } from 'react-icons/io5';
-import { Container } from '../container/container';
-import { THEME_NAME } from '../../constants';
 import styled from 'styled-components';
+import { setThemeAction } from '../../actions';
+import { Container } from '../container/container';
+import { THEME_NAME, STYLES } from '../../constants';
+import { selectTheme } from '../../selectors';
 
 const HeaderWrapper = styled.header`
-  background-color: var(--colors-ui-base);
-  box-shadow: var(--shadow);
+  background-color: ${({ theme }) => theme.color.base};
+  box-shadow: ${({ theme }) => theme.shadow.base};
 `;
 
 const HeaderInner = styled.div`
@@ -18,8 +21,8 @@ const HeaderInner = styled.div`
 `;
 
 const Title = styled(Link)`
-  font-size: var(--fs-sm);
-  font-weight: var(--fw-bold);
+  font-size: ${STYLES.FS.SMALL};
+  font-weight: ${STYLES.FW.BOLD};
 `;
 
 const ThemeSwitcher = styled.div`
@@ -31,16 +34,13 @@ const ThemeSwitcher = styled.div`
 const ThemeTitle = styled.div`
   text-transform: capitalize;
   margin-left: 0.5rem;
-  font-size: var(--fs-sm);
-  font-weight: var(--fw-normal);
+  font-size: ${STYLES.FS.SMALL};
+  font-weight: ${STYLES.FW.NORMAL};
 `;
 
 export const Header = () => {
-  const [theme, setTheme] = useState(THEME_NAME.DARK);
-
-  useEffect(() => {
-    document.body.setAttribute('data-theme', theme);
-  }, [theme]);
+  const theme = useSelector(selectTheme);
+  const dispatch = useDispatch();
 
   const toggleTheme = () => {
     const toolForToggle = {
@@ -48,7 +48,9 @@ export const Header = () => {
       [THEME_NAME.LIGHT]: THEME_NAME.DARK,
     };
 
-    setTheme(toolForToggle[theme]);
+    const newTheme = toolForToggle[theme];
+
+    dispatch(setThemeAction(newTheme));
   };
 
   return (
