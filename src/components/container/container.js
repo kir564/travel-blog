@@ -9,4 +9,8 @@ export const Container = styled.div`
   @media ${DEVICE.LARGE} {
     padding: 0 2rem;
   }
+
+  @media ${DEVICE.SMALL} {
+    max-width: 330px;
+  }
 `;

@@ -5,7 +5,7 @@ import { IoMoon, IoMoonOutline } from 'react-icons/io5';
 import styled from 'styled-components';
 import { setThemeAction } from '../../actions';
 import { Container } from '../container/container';
-import { THEME_NAME, STYLES } from '../../constants';
+import { THEME_NAME, STYLES, DEVICE } from '../../constants';
 import { selectTheme } from '../../selectors';
 
 const HeaderWrapper = styled.header`
@@ -18,11 +18,20 @@ const HeaderInner = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 2rem 0;
+
+  @media ${DEVICE.SMALL} {
+    flex-direction: column;
+    padding: 1rem 0;
+  }
 `;
 
 const Title = styled(Link)`
   font-size: ${STYLES.FS.SMALL};
   font-weight: ${STYLES.FW.BOLD};
+
+  @media ${DEVICE.SMALL} {
+    margin-bottom: 0.5rem;
+  }
 `;
 
 const ThemeSwitcher = styled.div`
