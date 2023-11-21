@@ -1,7 +1,9 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { IoMoon, IoMoonOutline } from 'react-icons/io5';
+import { IoMoon } from 'react-icons/io5';
+import { BiLogInCircle, BiLogOutCircle } from 'react-icons/bi';
+import { CgSun } from 'react-icons/cg';
 import styled from 'styled-components';
 import { setThemeAction } from '../../actions';
 import { Container } from '../container/container';
@@ -34,17 +36,15 @@ const Title = styled(Link)`
   }
 `;
 
-const ThemeSwitcher = styled.div`
+const ControlPanel = styled.div`
   display: flex;
   align-items: center;
-  cursor: pointer;
-`;
 
-const ThemeTitle = styled.div`
-  text-transform: capitalize;
-  margin-left: 0.5rem;
-  font-size: ${STYLES.FS.SMALL};
-  font-weight: ${STYLES.FW.NORMAL};
+  & > span {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+  }
 `;
 
 export const Header = () => {
@@ -66,15 +66,21 @@ export const Header = () => {
     <HeaderWrapper>
       <Container>
         <HeaderInner>
-          <Title>Where is the world?</Title>
-          <ThemeSwitcher onClick={toggleTheme}>
-            {theme === THEME_NAME.DARK ? (
-              <IoMoon size="14" />
+          <Title to="/">Where is the world?</Title>
+          <ControlPanel>
+            {theme === THEME_NAME.LIGHT ? (
+              <IoMoon size="14" onClick={toggleTheme} cursor="pointer" />
             ) : (
-              <IoMoonOutline size="14" />
+              <CgSun size="14" onClick={toggleTheme} cursor="pointer" />
             )}
-            <ThemeTitle>{theme} Theme</ThemeTitle>
-          </ThemeSwitcher>
+            <span>
+              {true ? (
+                <BiLogInCircle size="18" cursor="pointer" />
+              ) : (
+                <BiLogOutCircle size="18" cursor="pointer" />
+              )}
+            </span>
+          </ControlPanel>
         </HeaderInner>
       </Container>
     </HeaderWrapper>

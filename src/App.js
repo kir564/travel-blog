@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { AppTheme, Header, Main } from './components';
-import { HomePage } from './pages';
+import { DetailCountryPage, HomePage } from './pages';
 
 export const App = () => {
   return (
@@ -9,6 +9,7 @@ export const App = () => {
       <Main>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/country/:name" element={<DetailCountryPage />} />
         </Routes>
       </Main>
     </AppTheme>

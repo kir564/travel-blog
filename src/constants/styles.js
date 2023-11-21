@@ -14,5 +14,7 @@ export const STYLES = {
     BOLD: '800',
   },
 
-  RADII: '0.5rem',
+  RADII: {
+    MEDIUM: '0.5rem',
+  },
 };

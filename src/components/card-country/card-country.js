@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { STYLES, DEVICE } from '../../constants';
+import { STYLES } from '../../constants';
 
-const CardWrapper = styled.div`
+const CardWrapper = styled(Link)`
   background-color: ${({ theme }) => theme.color.base};
   box-shadow: ${({ theme }) => theme.shadow.base};
-  border-radius: ${STYLES.RADII};
+  border-radius: ${STYLES.RADII.MEDIUM};
   cursor: pointer;
   overflow: hidden;
   object-fit: cover;
@@ -42,7 +43,7 @@ const CardItem = styled.li`
 
 export const CardCountry = ({ country }) => {
   return (
-    <CardWrapper>
+    <CardWrapper to={`/country/${country.name}`}>
       <CardImage src={country.img} />
       <CardBody>
         <CardTitle>{country.name}</CardTitle>

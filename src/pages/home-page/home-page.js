@@ -21,9 +21,14 @@ export const HomePage = () => {
   const [countries, setCountries] = useState([]);
 
   useEffect(() => {
-    axios.get(ALL_COUNTRIES_URL).then(({ data }) => {
-      setCountries(data);
-    });
+    axios
+      .get(ALL_COUNTRIES_URL)
+      .then(({ data }) => {
+        setCountries(data);
+      })
+      .catch((error) => {
+        console.log(error.toJSON());
+      });
   }, []);
 
   return (
