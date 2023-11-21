@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { CardCountry } from '../../components';
+import { CardCountry, ControlPanel, Search } from '../../components';
 import { ALL_COUNTRIES_URL } from '../../configs';
 import { transformCountry } from '../../transforms';
 import { DEVICE } from '../../constants';
@@ -32,10 +32,15 @@ export const HomePage = () => {
   }, []);
 
   return (
-    <CountriesList>
-      {countries.map((country) => (
-        <CardCountry key={country.name} country={transformCountry(country)} />
-      ))}
-    </CountriesList>
+    <>
+      <ControlPanel>
+        <Search />
+      </ControlPanel>
+      <CountriesList>
+        {countries.map((country) => (
+          <CardCountry key={country.name} country={transformCountry(country)} />
+        ))}
+      </CountriesList>
+    </>
   );
 };
