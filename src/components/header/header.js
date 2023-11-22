@@ -30,6 +30,7 @@ const HeaderInner = styled.div`
 const Title = styled(Link)`
   font-size: ${STYLES.FS.SMALL};
   font-weight: ${STYLES.FW.BOLD};
+  font-style: italic;
 
   @media ${DEVICE.SMALL} {
     margin-bottom: 0.5rem;
@@ -66,18 +67,18 @@ export const Header = () => {
     <HeaderWrapper>
       <Container>
         <HeaderInner>
-          <Title to="/">Where is the world?</Title>
+          <Title to="/">Home</Title>
           <ControlPanel>
             {theme === THEME_NAME.LIGHT ? (
-              <IoMoon size="14" onClick={toggleTheme} cursor="pointer" />
+              <IoMoon size="18" onClick={toggleTheme} cursor="pointer" />
             ) : (
-              <CgSun size="14" onClick={toggleTheme} cursor="pointer" />
+              <CgSun size="18" onClick={toggleTheme} cursor="pointer" />
             )}
             <span>
               {true ? (
-                <BiLogInCircle size="18" cursor="pointer" />
+                <BiLogInCircle size="22" cursor="pointer" />
               ) : (
-                <BiLogOutCircle size="18" cursor="pointer" />
+                <BiLogOutCircle size="22" cursor="pointer" />
               )}
             </span>
           </ControlPanel>

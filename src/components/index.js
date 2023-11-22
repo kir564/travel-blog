@@ -1,5 +1,6 @@
 export * from './app-theme/app-theme';
 export * from './button/button';
+export * from './buttons-block/buttons-block';
 export * from './detail-card-country/detail-card-country';
 export * from './card-country/card-country';
 export * from './control-panel/control-panel';

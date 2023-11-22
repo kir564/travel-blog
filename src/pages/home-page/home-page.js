@@ -1,46 +1,25 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import { ControlPanel, Button } from '../../components';
+import { Link } from 'react-router-dom';
+
 import styled from 'styled-components';
-import { CardCountry, ControlPanel, Search } from '../../components';
-import { ALL_COUNTRIES_URL } from '../../configs';
-import { transformCountry } from '../../transforms';
-import { DEVICE } from '../../constants';
 
-const CountriesList = styled.div`
-  margin-top: 2rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 2.2rem;
+const Wrapper = styled.div``;
 
-  @media (${DEVICE.SMALL}) {
-    grid-template-columns: repeat(auto-fill, minmax(220px, 330px));
-  }
+const Buttons = styled.div`
+  display: flex;
 `;
 
 export const HomePage = () => {
-  const [countries, setCountries] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get(ALL_COUNTRIES_URL)
-      .then(({ data }) => {
-        setCountries(data);
-      })
-      .catch((error) => {
-        console.log(error.toJSON());
-      });
-  }, []);
-
   return (
-    <>
+    <Wrapper>
       <ControlPanel>
-        <Search />
+        <Buttons>
+          <Button>
+            <Link to="/countries">Countries</Link>
+          </Button>
+          <Button margin="0 2rem">Posts</Button>
+        </Buttons>
       </ControlPanel>
-      <CountriesList>
-        {countries.map((country) => (
-          <CardCountry key={country.name} country={transformCountry(country)} />
-        ))}
-      </CountriesList>
-    </>
+    </Wrapper>
   );
 };
