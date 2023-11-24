@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IoMoon } from 'react-icons/io5';
 import { BiLogInCircle, BiLogOutCircle } from 'react-icons/bi';
 import { CgSun } from 'react-icons/cg';
@@ -51,6 +51,7 @@ const ControlPanel = styled.div`
 export const Header = () => {
   const theme = useSelector(selectTheme);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const toggleTheme = () => {
     const toolForToggle = {
@@ -76,7 +77,11 @@ export const Header = () => {
             )}
             <span>
               {true ? (
-                <BiLogInCircle size="22" cursor="pointer" />
+                <BiLogInCircle
+                  size="22"
+                  cursor="pointer"
+                  onClick={() => navigate('/login')}
+                />
               ) : (
                 <BiLogOutCircle size="22" cursor="pointer" />
               )}

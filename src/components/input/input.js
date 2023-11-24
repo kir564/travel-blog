@@ -1,4 +1,5 @@
-import { STYLES, DEVICE } from '../../../../constants';
+import { forwardRef } from 'react';
+import { STYLES, DEVICE } from '../../constants';
 import styled from 'styled-components';
 
 const Wrapper = styled.label`
@@ -20,14 +21,14 @@ const Wrapper = styled.label`
   }
 `;
 
-const InputContainer = ({ className, title, ...props }) => {
+const InputContainer = forwardRef(({ className, title, ...props }, ref) => {
   return (
     <Wrapper>
       {title}
-      <input className={className} {...props} />
+      <input className={className} ref={ref} {...props} />
     </Wrapper>
   );
-};
+});
 
 export const Input = styled(InputContainer)`
   all: unset;

@@ -9,7 +9,7 @@ export const Button = styled(ButtonContainer)`
   margin: ${({ margin }) => margin || 0};
   display: flex;
   align-items: center;
-  padding: 0 1rem;
+  padding: ${({ padding }) => padding || '0 1rem'};
   line-height: 2.5;
   border: none;
   border-radius: ${STYLES.RADII.MEDIUM};
@@ -17,5 +17,7 @@ export const Button = styled(ButtonContainer)`
   color: ${({ theme }) => theme.color.text};
   box-shadow: ${({ theme }) => theme.shadow.base};
   font-size: ${STYLES.FS.SMALL};
+  justify-content: ${({ content }) => content};
+  width: ${({ width }) => width};
   cursor: pointer;
 `;
