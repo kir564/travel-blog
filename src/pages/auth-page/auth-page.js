@@ -1,9 +1,14 @@
+import { authFormSchema } from './auth-form-schema';
+import { setUserAction } from '../../actions';
+import { useState } from 'react';
 import { BiLock } from 'react-icons/bi';
 import { FiUser } from 'react-icons/fi';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Input, Button } from '../../components';
-import { authFormSchema } from './auth-form-schema';
+import { OPERATION } from '../../constants';
+import { useServerRequest } from '../../hooks';
 import styled from 'styled-components';
 
 const Wrapper = styled.form`
@@ -34,14 +39,26 @@ export const AuthPage = () => {
     resolver: yupResolver(authFormSchema),
   });
 
-  const errorForm = errors.login?.message || errors.password?.message;
+  const [serverError, setServerError] = useState(null);
+  const dispatch = useDispatch();
 
-  const onSubmit = (data) => {
-    console.log('data: ', data);
+  const serverRequest = useServerRequest();
 
-    if (!errorForm) {
-      reset();
-    }
+  const errorForm =
+    errors.login?.message || errors.password?.message || serverError;
+
+  const onSubmit = ({ login, password }) => {
+    serverRequest(OPERATION.AUTHORIZE, login, password).then(
+      ({ error, response }) => {
+        if (error) {
+          setServerError(error);
+          return;
+        } else {
+          reset();
+          dispatch(setUserAction(response));
+        }
+      },
+    );
   };
 
   return (

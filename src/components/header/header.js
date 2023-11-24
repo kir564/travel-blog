@@ -1,3 +1,4 @@
+import { setThemeAction, goOutActionAsync } from '../../actions';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
@@ -5,10 +6,9 @@ import { IoMoon } from 'react-icons/io5';
 import { BiLogInCircle, BiLogOutCircle } from 'react-icons/bi';
 import { CgSun } from 'react-icons/cg';
 import styled from 'styled-components';
-import { setThemeAction } from '../../actions';
 import { Container } from '../container/container';
 import { THEME_NAME, STYLES, DEVICE } from '../../constants';
-import { selectTheme } from '../../selectors';
+import { selectTheme, selectUserLogin, selectHash } from '../../selectors';
 
 const HeaderWrapper = styled.header`
   background-color: ${({ theme }) => theme.color.base};
@@ -48,8 +48,24 @@ const ControlPanel = styled.div`
   }
 `;
 
+const Login = styled.div`
+  width: 20px;
+  height: 20px;
+  border: 1px solid ${({ theme }) => theme.color.text};
+  box-shadow: ${({ theme }) => theme.shadow.base};
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  font-weight: ${STYLES.FW.BOLD};
+  cursor: pointer;
+`;
+
 export const Header = () => {
   const theme = useSelector(selectTheme);
+  const login = useSelector(selectUserLogin);
+  const hash = useSelector(selectHash);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -64,6 +80,10 @@ export const Header = () => {
     dispatch(setThemeAction(newTheme));
   };
 
+  const onGoOut = () => {
+    dispatch(goOutActionAsync(hash));
+  };
+
   return (
     <HeaderWrapper>
       <Container>
@@ -76,14 +96,21 @@ export const Header = () => {
               <CgSun size="18" onClick={toggleTheme} cursor="pointer" />
             )}
             <span>
-              {true ? (
+              {!login ? (
                 <BiLogInCircle
                   size="22"
                   cursor="pointer"
                   onClick={() => navigate('/login')}
                 />
               ) : (
-                <BiLogOutCircle size="22" cursor="pointer" />
+                <>
+                  <Login>{login[0]}</Login>
+                  <BiLogOutCircle
+                    size="22"
+                    cursor="pointer"
+                    onClick={onGoOut}
+                  />
+                </>
               )}
             </span>
           </ControlPanel>

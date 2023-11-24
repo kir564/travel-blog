@@ -1,3 +1,5 @@
 export const ACTION_TYPE = {
   SET_THEME: 'SET_THEME',
+  SET_USER: 'SET_USER',
+  RESET_USER: 'RESET_USER',
 };

@@ -1,1 +1,12 @@
-{}
+{
+  "users": [
+    {
+      "id": "001",
+      "login": "kir",
+      "password": "qwerty123",
+      "role_id": 1,
+      "registered_at": "2023-11-22 12:00"
+    }
+  ],
+  "sessions": []
+}
