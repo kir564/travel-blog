@@ -2,12 +2,14 @@ import axios from 'axios';
 import { URL_DB } from '../configs';
 import { transformUser } from '../transformers';
 
-export const getUser = (login) => {
-  const url = new URL(URL_DB.USERS);
-  url.searchParams.set('login', login);
-
-  return axios
-    .get(url)
+export const getUser = async (login) =>
+  axios({
+    url: URL_DB.USERS,
+    method: 'get',
+    params: {
+      login: login,
+    },
+  })
     .then(({ data }) => {
       const [user] = data;
 
@@ -16,4 +18,3 @@ export const getUser = (login) => {
     .catch((error) => {
       console.log(error.toJSON());
     });
-};

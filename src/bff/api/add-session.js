@@ -1,13 +1,14 @@
+import axios from 'axios';
 import { URL_DB } from '../configs';
 
 export const addSession = (hash, user) =>
-  fetch(URL_DB.SESSIONS, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-    },
-    body: JSON.stringify({
+  axios({
+    url: URL_DB.SESSIONS,
+    method: 'post',
+    data: {
       user,
       hash,
-    }),
+    },
+  }).catch((error) => {
+    console.log(error.toJSON());
   });

@@ -1,14 +1,22 @@
-import { setThemeAction, goOutActionAsync } from '../../actions';
+import { setThemeAction, resetUserAction } from '../../actions';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoMoon } from 'react-icons/io5';
 import { BiLogInCircle, BiLogOutCircle } from 'react-icons/bi';
 import { CgSun } from 'react-icons/cg';
+import { useServerRequest } from '../../hooks';
 import styled from 'styled-components';
 import { Container } from '../container/container';
-import { THEME_NAME, STYLES, DEVICE } from '../../constants';
-import { selectTheme, selectUserLogin, selectHash } from '../../selectors';
+import {
+  THEME_NAME,
+  STYLES,
+  DEVICE,
+  OPERATION,
+  STORAGE_KEY,
+  PATH,
+} from '../../constants';
+import { selectTheme, selectUserLogin } from '../../selectors';
 
 const HeaderWrapper = styled.header`
   background-color: ${({ theme }) => theme.color.base};
@@ -65,9 +73,9 @@ const Login = styled.div`
 export const Header = () => {
   const theme = useSelector(selectTheme);
   const login = useSelector(selectUserLogin);
-  const hash = useSelector(selectHash);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const serverRequest = useServerRequest();
 
   const toggleTheme = () => {
     const toolForToggle = {
@@ -81,7 +89,12 @@ export const Header = () => {
   };
 
   const onGoOut = () => {
-    dispatch(goOutActionAsync(hash));
+    serverRequest(OPERATION.GO_OUT).then(({ response }) => {
+      if (response) {
+        dispatch(resetUserAction);
+        sessionStorage.removeItem(STORAGE_KEY.USER);
+      }
+    });
   };
 
   return (
@@ -100,7 +113,7 @@ export const Header = () => {
                 <BiLogInCircle
                   size="22"
                   cursor="pointer"
-                  onClick={() => navigate('/login')}
+                  onClick={() => navigate(PATH.AUTH)}
                 />
               ) : (
                 <>

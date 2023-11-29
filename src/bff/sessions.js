@@ -13,7 +13,9 @@ export const sessions = {
 
     const [session] = responseSession;
 
-    await deleteSession(session.id);
+    const responseDelete = await deleteSession(session.id);
+
+    return responseDelete;
   },
   access: () => {},
 };

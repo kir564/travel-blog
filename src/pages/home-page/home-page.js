@@ -1,5 +1,6 @@
 import { ControlPanel, Button } from '../../components';
 import { Link } from 'react-router-dom';
+import { PATH } from '../../constants';
 
 import styled from 'styled-components';
 
@@ -15,7 +16,7 @@ export const HomePage = () => {
       <ControlPanel>
         <Buttons>
           <Button>
-            <Link to="/countries">Countries</Link>
+            <Link to={PATH.COUNTRIES}>Countries</Link>
           </Button>
           <Button margin="0 2rem">Posts</Button>
         </Buttons>

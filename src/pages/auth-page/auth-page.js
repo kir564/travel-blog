@@ -3,12 +3,14 @@ import { setUserAction } from '../../actions';
 import { useState } from 'react';
 import { BiLock } from 'react-icons/bi';
 import { FiUser } from 'react-icons/fi';
+import { Navigate, Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Input, Button } from '../../components';
-import { OPERATION } from '../../constants';
+import { OPERATION, STORAGE_KEY, PATH } from '../../constants';
 import { useServerRequest } from '../../hooks';
+import { selectUserLogin } from '../../selectors';
 import styled from 'styled-components';
 
 const Wrapper = styled.form`
@@ -27,6 +29,11 @@ const Wrapper = styled.form`
 const ErrorMessage = styled.p`
   color: red;
   font-style: italic;
+  margin-top: 0;
+`;
+
+const RegLink = styled.div`
+  font-style: italic;
 `;
 
 export const AuthPage = () => {
@@ -36,13 +43,18 @@ export const AuthPage = () => {
     reset,
     formState: { errors },
   } = useForm({
+    defaultValues: {
+      login: '',
+      password: '',
+    },
     resolver: yupResolver(authFormSchema),
   });
 
   const [serverError, setServerError] = useState(null);
   const dispatch = useDispatch();
-
+  const userName = useSelector(selectUserLogin);
   const serverRequest = useServerRequest();
+  const navigate = useNavigate();
 
   const errorForm =
     errors.login?.message || errors.password?.message || serverError;
@@ -56,10 +68,16 @@ export const AuthPage = () => {
         } else {
           reset();
           dispatch(setUserAction(response));
+          sessionStorage.setItem(STORAGE_KEY.USER, JSON.stringify(response));
+          navigate(-1);
         }
       },
     );
   };
+
+  if (userName) {
+    return <Navigate to={PATH.HOME} replace />;
+  }
 
   return (
     <Wrapper onSubmit={handleSubmit(onSubmit)}>
@@ -68,14 +86,18 @@ export const AuthPage = () => {
         title={<FiUser />}
         placeholder="login..."
         margin="0 0 0 2rem"
-        {...register('login')}
+        {...register('login', {
+          onChange: () => setServerError(null),
+        })}
       />
       <Input
         type="password"
         title={<BiLock />}
         placeholder="password..."
         margin="0 0 0 2rem"
-        {...register('password')}
+        {...register('password', {
+          onChange: () => setServerError(null),
+        })}
       />
       <Button
         padding="0.5rem"
@@ -85,6 +107,9 @@ export const AuthPage = () => {
       >
         Войти
       </Button>
+      <RegLink>
+        <Link to={PATH.REGISTER}>Регистрация</Link>
+      </RegLink>
       <ErrorMessage>{errorForm}</ErrorMessage>
     </Wrapper>
   );
