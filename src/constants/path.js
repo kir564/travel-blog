@@ -8,4 +8,5 @@ export const PATH = {
   COUNTRY: `/country/:${PATH_PARAMS.NAME}`,
   COUNTRIES: '/countries',
   REGISTER: '/register',
+  HOTEL: `/hotel/:${PATH_PARAMS.NAME}`,
 };

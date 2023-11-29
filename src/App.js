@@ -9,6 +9,7 @@ import {
   DetailCountryPage,
   HomePage,
   RegisterPage,
+  HotelPage,
 } from './pages';
 
 export const App = () => {
@@ -25,6 +26,7 @@ export const App = () => {
       <Main>
         <Routes>
           <Route path={PATH.HOME} element={<HomePage />} />
+          <Route path={PATH.HOTEL} element={<HotelPage />} />
           <Route path={PATH.AUTH} element={<AuthPage />} />
           <Route path={PATH.REGISTER} element={<RegisterPage />} />
           <Route path={PATH.COUNTRIES} element={<CountriesPage />} />

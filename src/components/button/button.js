@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { STYLES } from '../../constants';
 
@@ -21,3 +22,14 @@ export const Button = styled(ButtonContainer)`
   width: ${({ width }) => width};
   cursor: pointer;
 `;
+
+Button.propTypes = {
+  children: PropTypes.node,
+  props: PropTypes.shape({
+    margin: PropTypes.string,
+    padding: PropTypes.string,
+    width: PropTypes.string,
+    onClick: PropTypes.func,
+    content: PropTypes.string,
+  }),
+};

@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { IoArrowBack } from 'react-icons/io5';
 import { BiLock } from 'react-icons/bi';
 import { Button } from '../../components';
-import { DEVICE } from '../../constants';
-import { useNavigate } from 'react-router-dom';
+import { DEVICE, PATH } from '../../constants';
+import { useNavigate, useMatch } from 'react-router-dom';
 
 const Wrapper = styled.div`
   display: flex;
@@ -25,12 +25,19 @@ const ButtonTitle = styled.span`
 
 export const ButtonsBlock = () => {
   const navigate = useNavigate();
+  const isCountriesPage = !!useMatch(PATH.COUNTRIES);
+
   return (
     <Wrapper>
       <Button onClick={() => navigate(-1)}>
         <IoArrowBack />
         <ButtonTitle>Back</ButtonTitle>
       </Button>
+      {!isCountriesPage && (
+        <Button margin="0 0 0 2rem" onClick={() => navigate(PATH.COUNTRIES)}>
+          Countries
+        </Button>
+      )}
       <Button margin="0 2rem">Posts</Button>
       <Button>All Posts</Button>
       <Button margin="0 0 0 2rem">

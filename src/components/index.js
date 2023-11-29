@@ -8,3 +8,4 @@ export * from './control-panel/control-panel';
 export * from './header/header';
 export * from './main/main';
 export * from './search/search';
+export * from './search-hotel/search-hotel';

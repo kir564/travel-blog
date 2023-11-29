@@ -26,8 +26,6 @@ export const CountriesPage = () => {
   const [countries, setCountries] = useState([]);
   const [search, setSearch] = useState('');
 
-  // const countryNames = countries.map(({ name }) => name);
-
   const filteredCountries = countries.filter(({ name }) =>
     name.toLocaleLowerCase().startsWith(search.toLocaleLowerCase()),
   );

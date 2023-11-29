@@ -1,4 +1,4 @@
-import { ControlPanel, Button } from '../../components';
+import { ControlPanel, Button, SearchHotel } from '../../components';
 import { Link } from 'react-router-dom';
 import { PATH } from '../../constants';
 
@@ -20,6 +20,9 @@ export const HomePage = () => {
           </Button>
           <Button margin="0 2rem">Posts</Button>
         </Buttons>
+        <ControlPanel>
+          <SearchHotel />
+        </ControlPanel>
       </ControlPanel>
     </Wrapper>
   );
