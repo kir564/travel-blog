@@ -6,6 +6,13 @@
       "password": "qwerty123",
       "role_id": 1,
       "registered_at": "2023-11-22 12:00"
+    },
+    {
+      "login": "ann",
+      "password": "qwerty123",
+      "registered_at": "2023-11-29 06:26",
+      "role_id": 2,
+      "id": "Wr8dR93"
     }
   ],
   "sessions": []

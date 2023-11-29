@@ -7,7 +7,9 @@ export const useServerRequest = () => {
   const hash = useSelector(selectHash);
 
   return (operation, ...params) => {
-    const requestParams = [OPERATION.AUTHORIZE].includes(operation)
+    const requestParams = [OPERATION.AUTHORIZE, OPERATION.REGISTER].includes(
+      operation,
+    )
       ? params
       : [hash, ...params];
 
