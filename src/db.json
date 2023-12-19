@@ -15,5 +15,40 @@
       "id": "Wr8dR93"
     }
   ],
-  "sessions": []
+  "sessions": [],
+  "hotels": [
+    {
+      "id": "001",
+      "city": "Москва",
+      "name": "Hotel-1",
+      "description": "",
+      "quantity": "одноместный",
+      "category": "люкс",
+      "order": false,
+      "img": "https://via.placeholder.com/600x300/FFF8DC",
+      "price": 2000
+    },
+    {
+      "id": "002",
+      "city": "Москва",
+      "name": "Hotel-1",
+      "description": "",
+      "quantity": "одноместный",
+      "category": "люкс",
+      "order": false,
+      "img": "https://via.placeholder.com/600x300/ADFF2F",
+      "price": 2000
+    },
+    {
+      "id": "003",
+      "city": "Москва",
+      "name": "Hotel-1",
+      "description": "",
+      "quantity": "одноместный",
+      "category": "люкс",
+      "order": false,
+      "img": "https://via.placeholder.com/600x300/#2E8B57",
+      "price": 2000
+    }
+  ]
 }

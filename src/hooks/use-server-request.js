@@ -7,9 +7,12 @@ export const useServerRequest = () => {
   const hash = useSelector(selectHash);
 
   return (operation, ...params) => {
-    const requestParams = [OPERATION.AUTHORIZE, OPERATION.REGISTER].includes(
-      operation,
-    )
+    const requestParams = [
+      OPERATION.AUTHORIZE,
+      OPERATION.REGISTER,
+      OPERATION.FETCH_HOTELS,
+      OPERATION.FETCH_HOTEL,
+    ].includes(operation)
       ? params
       : [hash, ...params];
 

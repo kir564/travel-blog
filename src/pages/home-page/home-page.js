@@ -3,16 +3,24 @@ import { IoSearchSharp } from 'react-icons/io5';
 
 import { Link } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
-import { PATH } from '../../constants';
+import { PATH, OPERATION } from '../../constants';
 import styled from 'styled-components';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { searchHotelSchema } from './search-hotel-schema';
 import { categoryOptions, quantityOptions } from './select-options';
+import { useServerRequest } from '../../hooks';
+import { useState } from 'react';
 
 const Wrapper = styled.div``;
 
 const Buttons = styled.div`
   display: flex;
+`;
+
+const ErrorMessage = styled.p`
+  color: red;
+  font-style: italic;
+  margin-top: 0;
 `;
 
 const SearchHotelForm = styled.form``;
@@ -33,7 +41,14 @@ export const HomePage = () => {
     // resolver: yupResolver(searchHotelSchema),
   });
 
+  const [hotels, setHotels] = useState([]);
+  const [requestError, setRequestError] = useState(null);
+
+  const serverRequest = useServerRequest();
+
   const onSubmit = (formData) => {
+    setRequestError(null);
+
     const data = {};
 
     for (const [key, content] of Object.entries(formData)) {
@@ -44,7 +59,13 @@ export const HomePage = () => {
       }
     }
 
-    console.log('search hotel formData: ', data);
+    serverRequest(OPERATION.FETCH_HOTELS, data).then(({ error, response }) => {
+      if (error) {
+        setRequestError(error);
+      } else {
+        setHotels(response);
+      }
+    });
   };
 
   return (
@@ -101,6 +122,13 @@ export const HomePage = () => {
             </Button>
           </SearchHotelForm>
         </ControlPanel>
+        {requestError && <ErrorMessage>{requestError}</ErrorMessage>}
+        {hotels.length !== 0 &&
+          hotels.map(({ id, name }) => (
+            <p key={id}>
+              <Link to={`/hotels/${id}`}>{name}</Link>
+            </p>
+          ))}
       </ControlPanel>
     </Wrapper>
   );

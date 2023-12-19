@@ -1,5 +1,6 @@
 export const PATH_PARAMS = {
   NAME: 'name',
+  ID: 'id',
 };
 
 export const PATH = {
@@ -8,5 +9,5 @@ export const PATH = {
   COUNTRY: `/country/:${PATH_PARAMS.NAME}`,
   COUNTRIES: '/countries',
   REGISTER: '/register',
-  HOTEL: `/hotel/:${PATH_PARAMS.NAME}`,
+  HOTEL: `/hotels/:${PATH_PARAMS.ID}`,
 };
