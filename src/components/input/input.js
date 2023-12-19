@@ -8,16 +8,17 @@ const Wrapper = styled.label`
   background-color: ${({ theme }) => theme.color.base};
   box-shadow: ${({ theme }) => theme.shadow.base};
   border-radius: ${STYLES.RADII.MEDIUM};
-  padding: 1rem 3rem;
+  padding: 0.8rem 3rem;
+  width: 100%;
 
   @media (${DEVICE.SMALL}) {
     width: 100%;
     min-width: 225px;
-    padding: 1rem 2rem;
+    padding: 0.8rem 2rem;
   }
 
   @media (max-width: 320px) {
-    padding: 1rem;
+    padding: 0.8rem 1rem;
   }
 `;
 

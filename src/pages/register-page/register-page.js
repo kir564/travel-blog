@@ -102,7 +102,7 @@ export const RegisterPage = () => {
         })}
       />
       <Button
-        padding="0.5rem"
+        padding="0.24rem"
         content="center"
         width="100%"
         disabled={errorForm}

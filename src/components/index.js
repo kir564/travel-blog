@@ -5,7 +5,7 @@ export * from './detail-card-country/detail-card-country';
 export * from './input/input';
 export * from './card-country/card-country';
 export * from './control-panel/control-panel';
+export * from './custom-select/custom-select';
 export * from './header/header';
 export * from './main/main';
 export * from './search/search';
-export * from './search-hotel/search-hotel';
