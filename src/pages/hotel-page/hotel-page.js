@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ButtonsBlock, ControlPanel } from '../../components';
+import { ButtonsBlock, ControlPanel, DetailCardHotel } from '../../components';
 import { useParams } from 'react-router-dom';
 import { useServerRequest } from '../../hooks';
 import { useEffect, useState } from 'react';
@@ -15,7 +15,7 @@ const ErrorMessage = styled.p`
 
 export const HotelPage = () => {
   const { id } = useParams();
-  const [hotel, setHotel] = useState({});
+  const [hotel, setHotel] = useState(null);
   const [requestError, setRequestError] = useState(null);
   const serverRequest = useServerRequest();
 
@@ -27,7 +27,7 @@ export const HotelPage = () => {
         setHotel(response);
       }
     });
-  }, [id, serverRequest]);
+  }, []);
 
   return (
     <Wrapper>
@@ -36,11 +36,7 @@ export const HotelPage = () => {
       </ControlPanel>
       <ControlPanel>
         {requestError && <ErrorMessage>{requestError}</ErrorMessage>}
-        {Object.entries(hotel).map(([key, value]) => (
-          <p key={key}>
-            {key}: {value}
-          </p>
-        ))}
+        {hotel && <DetailCardHotel hotel={hotel} />}
       </ControlPanel>
     </Wrapper>
   );

@@ -1,4 +1,11 @@
-import { Button, ControlPanel, CustomSelect, Input } from '../../components';
+import {
+  Button,
+  CardListWrapper,
+  ControlPanel,
+  CustomSelect,
+  Input,
+  CardHotel,
+} from '../../components';
 import { IoSearchSharp } from 'react-icons/io5';
 
 import { Link } from 'react-router-dom';
@@ -10,6 +17,7 @@ import { searchHotelSchema } from './search-hotel-schema';
 import { categoryOptions, quantityOptions } from './select-options';
 import { useServerRequest } from '../../hooks';
 import { useState } from 'react';
+import { transformHotel } from '../../transforms';
 
 const Wrapper = styled.div``;
 
@@ -123,12 +131,12 @@ export const HomePage = () => {
           </SearchHotelForm>
         </ControlPanel>
         {requestError && <ErrorMessage>{requestError}</ErrorMessage>}
-        {hotels.length !== 0 &&
-          hotels.map(({ id, name }) => (
-            <p key={id}>
-              <Link to={`/hotels/${id}`}>{name}</Link>
-            </p>
-          ))}
+        <CardListWrapper>
+          {hotels.length !== 0 &&
+            hotels.map((hotel) => (
+              <CardHotel key={hotel.id} hotel={transformHotel(hotel)} />
+            ))}
+        </CardListWrapper>
       </ControlPanel>
     </Wrapper>
   );

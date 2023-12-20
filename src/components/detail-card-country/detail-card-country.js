@@ -1,5 +1,6 @@
 import { Info } from './components';
-import { DEVICE } from '../../constants';
+import { DetailCardImage } from '../detail-card-image/detail-card-image';
+// import { DEVICE } from '../../constants';
 import PropTypes from 'prop-types';
 import { transformCountryDetail } from '../../transforms';
 
@@ -12,18 +13,18 @@ const WrapperDetailCard = styled.div`
   align-items: center;
 `;
 
-const CountryImage = styled.img`
-  display: block;
-  max-width: 600px;
-  height: 100%;
-  object-fit: contain;
-  margin: 4rem auto;
+// const DetailCardImage = styled.img`
+//   display: block;
+//   max-width: 600px;
+//   height: 100%;
+//   object-fit: contain;
+//   margin: 4rem auto;
 
-  @media (${DEVICE.MEDIUM}) {
-    margin: 0 0 2rem 0;
-    max-width: 100%;
-  }
-`;
+//   @media (${DEVICE.MEDIUM}) {
+//     margin: 0 0 2rem 0;
+//     max-width: 100%;
+//   }
+// `;
 
 export const DetailCardCountry = ({ country }) => {
   const countryInfo = transformCountryDetail(country);
@@ -31,7 +32,7 @@ export const DetailCardCountry = ({ country }) => {
   return (
     <Wrapper>
       <WrapperDetailCard>
-        <CountryImage src={countryInfo.img} alt={country.name} />
+        <DetailCardImage src={countryInfo.img} alt={country.name} />
         <Info country={countryInfo} />
       </WrapperDetailCard>
     </Wrapper>

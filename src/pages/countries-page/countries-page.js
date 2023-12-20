@@ -3,24 +3,25 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import {
   CardCountry,
+  CardListWrapper,
   ControlPanel,
   Search,
   ButtonsBlock,
 } from '../../components';
 import { ALL_COUNTRIES_URL } from '../../configs';
 import { transformCountry } from '../../transforms';
-import { DEVICE } from '../../constants';
+// import { DEVICE } from '../../constants';
 
-const CountriesList = styled.div`
-  margin-top: 2rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 2.2rem;
+// export const CardList = styled.div`
+//   margin-top: 2rem;
+//   display: grid;
+//   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+//   gap: 2.2rem;
 
-  @media (${DEVICE.SMALL}) {
-    grid-template-columns: repeat(auto-fill, minmax(220px, 330px));
-  }
-`;
+//   @media (${DEVICE.SMALL}) {
+//     grid-template-columns: repeat(auto-fill, minmax(220px, 330px));
+//   }
+// `;
 
 export const CountriesPage = () => {
   const [countries, setCountries] = useState([]);
@@ -49,11 +50,11 @@ export const CountriesPage = () => {
       <ControlPanel>
         <Search setSearch={setSearch} />
       </ControlPanel>
-      <CountriesList>
+      <CardListWrapper>
         {filteredCountries.map((country) => (
           <CardCountry key={country.name} country={transformCountry(country)} />
         ))}
-      </CountriesList>
+      </CardListWrapper>
     </>
   );
 };

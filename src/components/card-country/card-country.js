@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { STYLES } from '../../constants';
 
-const CardWrapper = styled(Link)`
+export const CardWrapper = styled(Link)`
   background-color: ${({ theme }) => theme.color.base};
   box-shadow: ${({ theme }) => theme.shadow.base};
   border-radius: ${STYLES.RADII.MEDIUM};
@@ -14,7 +14,7 @@ const CardWrapper = styled(Link)`
   object-position: center;
 `;
 
-const CardImage = styled.img`
+export const CardImage = styled.img`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,22 +22,22 @@ const CardImage = styled.img`
   height: 150px;
 `;
 
-const CardBody = styled.div`
+export const CardBody = styled.div`
   padding: 1rem 1.5rem 2rem;
   font-size: ${STYLES.FS.SMALL};
 `;
 
-const CardTitle = styled.h3`
+export const CardTitle = styled.h3`
   margin: 0;
 `;
 
-const CardList = styled.ul`
+export const CardList = styled.ul`
   margin: 0;
   padding: 1rem 0 0;
   list-style: none;
 `;
 
-const CardItem = styled.li`
+export const CardItem = styled.li`
   line-height: 1.5;
 `;
 
