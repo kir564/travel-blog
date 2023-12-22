@@ -12,6 +12,8 @@ export const addUser = (login, password) =>
       password,
       registered_at: getDateFormat(),
       role_id: ROLE.READER,
+      hotels: [],
+      posts: [],
     },
   })
     .then(({ data }) => data)

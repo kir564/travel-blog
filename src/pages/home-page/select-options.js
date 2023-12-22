@@ -1,7 +1,6 @@
 export const quantityOptions = [
   { value: 'одноместный', label: 'одноместный' },
   { value: 'двухместный', label: 'двухместный' },
-  { value: 'трёхместный', label: 'трёхместный' },
 ];
 
 export const timeOptions = [
@@ -11,6 +10,6 @@ export const timeOptions = [
 
 export const categoryOptions = [
   { value: 'эконом', label: 'эконом' },
-  { value: 'полу-люкс', label: 'полу-люкс' },
+  { value: 'стандарт', label: 'стандарт' },
   { value: 'люкс', label: 'люкс' },
 ];

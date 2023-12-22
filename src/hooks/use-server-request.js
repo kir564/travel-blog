@@ -12,6 +12,7 @@ export const useServerRequest = () => {
       OPERATION.REGISTER,
       OPERATION.FETCH_HOTELS,
       OPERATION.FETCH_HOTEL,
+      OPERATION.FETCH_CHANGE_DATA_USER,
     ].includes(operation)
       ? params
       : [hash, ...params];

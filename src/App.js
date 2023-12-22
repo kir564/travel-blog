@@ -10,6 +10,7 @@ import {
   HomePage,
   RegisterPage,
   HotelPage,
+  UserPage,
 } from './pages';
 
 export const App = () => {
@@ -29,6 +30,7 @@ export const App = () => {
           <Route path={PATH.HOTEL} element={<HotelPage />} />
           <Route path={PATH.AUTH} element={<AuthPage />} />
           <Route path={PATH.REGISTER} element={<RegisterPage />} />
+          <Route path={PATH.USER} element={<UserPage />} />
           <Route path={PATH.COUNTRIES} element={<CountriesPage />} />
           <Route path={PATH.COUNTRY} element={<DetailCountryPage />} />
         </Routes>

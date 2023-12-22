@@ -5,17 +5,43 @@
       "login": "kir",
       "password": "qwerty123",
       "role_id": 1,
-      "registered_at": "2023-11-22 12:00"
+      "registered_at": "2023-11-22 12:00",
+      "hotels": [
+        {
+          "orderedAt": "2023-12-22 10:27",
+          "id": "001"
+        },
+        {
+          "orderedAt": "2023-12-22 10:56",
+          "id": "003"
+        }
+      ],
+      "posts": []
     },
     {
       "login": "ann",
       "password": "qwerty123",
       "registered_at": "2023-11-29 06:26",
       "role_id": 2,
-      "id": "Wr8dR93"
+      "id": "Wr8dR93",
+      "hotels": [],
+      "posts": []
     }
   ],
-  "sessions": [],
+  "sessions": [
+    {
+      "user": {
+        "id": "001",
+        "login": "kir",
+        "registeredAt": "2023-11-22 12:00",
+        "roleId": 1,
+        "hotels": [],
+        "posts": []
+      },
+      "hash": "0.22238032903756432823172417556634172797203063964844",
+      "id": 1
+    }
+  ],
   "hotels": [
     {
       "id": "001",
@@ -23,7 +49,7 @@
       "name": "Hotel-1",
       "description": "",
       "quantity": "одноместный",
-      "category": "люкс",
+      "category": "эконом",
       "order": false,
       "img": "https://via.placeholder.com/600x300/FFF8DC",
       "price": 2000
@@ -34,7 +60,7 @@
       "name": "Hotel-1",
       "description": "",
       "quantity": "одноместный",
-      "category": "люкс",
+      "category": "стандарт",
       "order": false,
       "img": "https://via.placeholder.com/600x300/ADFF2F",
       "price": 2000

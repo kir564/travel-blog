@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { URL_DB } from '../configs';
-import { transformUser } from '../transformers';
+import { transformUser } from '../../transforms';
 
 export const getUser = async (login) =>
   axios({

@@ -6,6 +6,8 @@ const initialUserState = {
   login: null,
   registeredAt: null,
   roleId: ROLE.GUEST,
+  hotels: [],
+  posts: [],
 };
 
 export const userReducer = (state = initialUserState, { type, payload }) => {
@@ -13,6 +15,12 @@ export const userReducer = (state = initialUserState, { type, payload }) => {
     case ACTION_TYPE.SET_USER:
       return {
         ...payload,
+      };
+
+    case ACTION_TYPE.SET_ORDERED_HOTELS:
+      return {
+        ...state,
+        hotels: payload,
       };
 
     case ACTION_TYPE.RESET_USER:

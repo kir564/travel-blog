@@ -62,6 +62,7 @@ export const AuthPage = () => {
   const onSubmit = ({ login, password }) => {
     serverRequest(OPERATION.AUTHORIZE, login, password).then(
       ({ error, response }) => {
+        console.log('response: ', response);
         if (error) {
           setServerError(error);
           return;

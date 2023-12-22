@@ -97,6 +97,10 @@ export const Header = () => {
     });
   };
 
+  const goUserPage = () => {
+    navigate(`${PATH.USERS}/${login}`);
+  };
+
   return (
     <HeaderWrapper>
       <Container>
@@ -117,7 +121,7 @@ export const Header = () => {
                 />
               ) : (
                 <>
-                  <Login>{login[0]}</Login>
+                  <Login onClick={goUserPage}>{login[0]}</Login>
                   <BiLogOutCircle
                     size="22"
                     cursor="pointer"

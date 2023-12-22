@@ -1,9 +1,18 @@
-import styled from 'styled-components';
-import { ButtonsBlock, ControlPanel, DetailCardHotel } from '../../components';
+import { setOrderedHotels } from '../../actions';
+import { OPERATION } from '../../constants';
+
+import {
+  Button,
+  ButtonsBlock,
+  ControlPanel,
+  DetailCardHotel,
+} from '../../components';
 import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { useServerRequest } from '../../hooks';
 import { useEffect, useState } from 'react';
-import { OPERATION } from '../../constants';
+import { selectUserLogin, selectUserId } from '../../selectors';
+import styled from 'styled-components';
 
 const Wrapper = styled.div``;
 
@@ -18,6 +27,9 @@ export const HotelPage = () => {
   const [hotel, setHotel] = useState(null);
   const [requestError, setRequestError] = useState(null);
   const serverRequest = useServerRequest();
+  const login = useSelector(selectUserLogin);
+  const userId = useSelector(selectUserId);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     serverRequest(OPERATION.FETCH_HOTEL, id).then(({ error, response }) => {
@@ -29,6 +41,17 @@ export const HotelPage = () => {
     });
   }, []);
 
+  const orderHotel = async () => {
+    await serverRequest(
+      OPERATION.FETCH_CHANGE_DATA_USER,
+      login,
+      userId,
+      id,
+    ).then(({ error, response }) => {
+      dispatch(setOrderedHotels(response));
+    });
+  };
+
   return (
     <Wrapper>
       <ControlPanel>
@@ -38,6 +61,11 @@ export const HotelPage = () => {
         {requestError && <ErrorMessage>{requestError}</ErrorMessage>}
         {hotel && <DetailCardHotel hotel={hotel} />}
       </ControlPanel>
+      {login && (
+        <ControlPanel>
+          <Button onClick={orderHotel}>Забронировать</Button>
+        </ControlPanel>
+      )}
     </Wrapper>
   );
 };
