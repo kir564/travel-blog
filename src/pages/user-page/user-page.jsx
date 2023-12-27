@@ -1,4 +1,5 @@
-import { Button, ButtonsBlock, ControlPanel } from '../../components';
+import { Button, ButtonsBlock } from '../../components';
+import { BlockWrapper } from '../../containers';
 import { useSelector } from 'react-redux';
 import { selectUserLogin, selectOrderedHotels } from '../../selectors';
 
@@ -12,9 +13,9 @@ export const UserPage = () => {
 
   return (
     <Wrapper>
-      <ControlPanel>
+      <BlockWrapper>
         <ButtonsBlock />
-      </ControlPanel>
+      </BlockWrapper>
       <h2>Информация о пользователе:</h2>
       <p>
         <b>Пользователь:</b>

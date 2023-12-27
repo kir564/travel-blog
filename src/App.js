@@ -1,7 +1,8 @@
 import { setUserAction } from './actions';
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { AppTheme, Header, Main } from './components';
+import { Header } from './components';
+import { AppTheme, Main } from './containers';
 import { STORAGE_KEY, PATH } from './constants';
 import {
   AuthPage,
