@@ -4,4 +4,5 @@ export const URL_DB = {
   HOTELS: BASE_URL + 'hotels',
   USERS: BASE_URL + 'users',
   SESSIONS: BASE_URL + 'sessions',
+  HOTEL_COMMENTS: BASE_URL + 'hotelComments',
 };

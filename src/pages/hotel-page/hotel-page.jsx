@@ -22,6 +22,7 @@ const ErrorMessage = styled.p`
 export const HotelPage = () => {
   const { id } = useParams();
   const [hotel, setHotel] = useState(null);
+  const [comments, setComments] = useState([]);
   const [requestError, setRequestError] = useState(null);
   const serverRequest = useServerRequest();
   const login = useSelector(selectUserLogin);
@@ -29,13 +30,23 @@ export const HotelPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    serverRequest(OPERATION.FETCH_HOTEL, id).then(({ error, response }) => {
+    const request = async () => {
+      const [responseHotel, responseComments] = await Promise.all([
+        serverRequest(OPERATION.FETCH_HOTEL, id),
+        serverRequest(OPERATION.FETCH_HOTEL_COMMENTS, id),
+      ]);
+
+      const error = responseHotel.error || responseComments.error;
+
       if (error) {
         setRequestError(error);
       } else {
-        setHotel(response);
+        setHotel(responseHotel.response);
+        setComments(responseComments.response);
       }
-    });
+    };
+
+    request();
   }, []);
 
   const orderHotel = async () => {
@@ -62,6 +73,11 @@ export const HotelPage = () => {
           <Button onClick={orderHotel}>Забронировать</Button>
         </BlockWrapper>
       )}
+      {comments.map(({ id, text }) => (
+        <p key={id} style={{ border: '1px solid black', padding: '1rem' }}>
+          {text}
+        </p>
+      ))}
     </Wrapper>
   );
 };
