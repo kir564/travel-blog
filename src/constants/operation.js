@@ -4,5 +4,6 @@ export const OPERATION = {
   REGISTER: 'register',
   FETCH_HOTELS: 'fetchHotels',
   FETCH_HOTEL: 'fetchHotel',
-  FETCH_CHANGE_DATA_USER: 'fetchChangeDataUser',
+  FETCH_ORDER_HOTEL: 'fetchOrderHotel',
+  FETCH_CANCEL_ORDER_HOTEL: 'fetchCancelOrderHotel',
 };

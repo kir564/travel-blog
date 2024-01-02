@@ -56,6 +56,7 @@ export const HomePage = () => {
   });
 
   const [hotels, setHotels] = useState([]);
+
   const [requestError, setRequestError] = useState(null);
 
   const serverRequest = useServerRequest();
@@ -76,9 +77,8 @@ export const HomePage = () => {
     serverRequest(OPERATION.FETCH_HOTELS, data).then(({ error, response }) => {
       if (error) {
         setRequestError(error);
-      } else {
-        setHotels(response);
       }
+      setHotels(response || []);
     });
   };
 
@@ -138,10 +138,9 @@ export const HomePage = () => {
         </BlockWrapper>
         {requestError && <ErrorMessage>{requestError}</ErrorMessage>}
         <CardListWrapper>
-          {hotels.length !== 0 &&
-            hotels.map((hotel) => (
-              <CardHotel key={hotel.id} hotel={transformHotel(hotel)} />
-            ))}
+          {hotels.map((hotel) => (
+            <CardHotel key={hotel.id} hotel={transformHotel(hotel)} />
+          ))}
         </CardListWrapper>
       </BlockWrapper>
     </Wrapper>

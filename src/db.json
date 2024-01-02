@@ -24,7 +24,25 @@
       "posts": []
     }
   ],
-  "sessions": [],
+  "sessions": [
+    {
+      "user": {
+        "id": "001",
+        "login": "kir",
+        "registeredAt": "2023-11-22 12:00",
+        "roleId": 1,
+        "hotels": [
+          {
+            "orderedAt": "2023-12-22 16:06",
+            "id": "001"
+          }
+        ],
+        "posts": []
+      },
+      "hash": "0.16061303691890982392465048178564757108688354492188",
+      "id": 1
+    }
+  ],
   "hotels": [
     {
       "id": "001",
@@ -35,7 +53,7 @@
       "category": "эконом",
       "order": false,
       "img": "https://via.placeholder.com/600x300/FFF8DC",
-      "price": 2000
+      "price": 1000
     },
     {
       "id": "002",
@@ -56,8 +74,173 @@
       "quantity": "одноместный",
       "category": "люкс",
       "order": false,
-      "img": "https://via.placeholder.com/600x300/#2E8B57",
+      "img": "https://via.placeholder.com/600x300/2E8B57",
+      "price": 3000
+    },
+    {
+      "id": "004",
+      "city": "Москва",
+      "name": "Hotel-2",
+      "description": "",
+      "quantity": "одноместный",
+      "category": "эконом",
+      "order": false,
+      "img": "https://via.placeholder.com/600x300/FFF8DC",
+      "price": 1000
+    },
+    {
+      "id": "005",
+      "city": "Москва",
+      "name": "Hotel-2",
+      "description": "",
+      "quantity": "одноместный",
+      "category": "стандарт",
+      "order": false,
+      "img": "https://via.placeholder.com/600x300/ADFF2F",
       "price": 2000
+    },
+    {
+      "id": "006",
+      "city": "Москва",
+      "name": "Hotel-2",
+      "description": "",
+      "quantity": "одноместный",
+      "category": "люкс",
+      "order": false,
+      "img": "https://via.placeholder.com/600x300/2E8B57",
+      "price": 3000
+    },
+    {
+      "id": "007",
+      "city": "Москва",
+      "name": "Hotel-3",
+      "description": "",
+      "quantity": "одноместный",
+      "category": "эконом",
+      "order": false,
+      "img": "https://via.placeholder.com/600x300/FFF8DC",
+      "price": 1000
+    },
+    {
+      "id": "008",
+      "city": "Москва",
+      "name": "Hotel-3",
+      "description": "",
+      "quantity": "одноместный",
+      "category": "стандарт",
+      "order": false,
+      "img": "https://via.placeholder.com/600x300/ADFF2F",
+      "price": 2000
+    },
+    {
+      "id": "009",
+      "city": "Москва",
+      "name": "Hotel-3",
+      "description": "",
+      "quantity": "одноместный",
+      "category": "люкс",
+      "order": false,
+      "img": "https://via.placeholder.com/600x300/2E8B57",
+      "price": 3000
+    },
+    {
+      "id": "010",
+      "city": "Москва",
+      "name": "Hotel-1",
+      "description": "",
+      "quantity": "двухместный",
+      "category": "эконом",
+      "order": false,
+      "img": "https://via.placeholder.com/600x300/FFF8DC",
+      "price": 2000
+    },
+    {
+      "id": "011",
+      "city": "Москва",
+      "name": "Hotel-1",
+      "description": "",
+      "quantity": "двухместный",
+      "category": "стандарт",
+      "order": false,
+      "img": "https://via.placeholder.com/600x300/ADFF2F",
+      "price": 4000
+    },
+    {
+      "id": "012",
+      "city": "Москва",
+      "name": "Hotel-1",
+      "description": "",
+      "quantity": "двухместный",
+      "category": "люкс",
+      "order": false,
+      "img": "https://via.placeholder.com/600x300/2E8B57",
+      "price": 6000
+    },
+    {
+      "id": "013",
+      "city": "Москва",
+      "name": "Hotel-2",
+      "description": "",
+      "quantity": "двухместный",
+      "category": "эконом",
+      "order": false,
+      "img": "https://via.placeholder.com/600x300/FFF8DC",
+      "price": 2000
+    },
+    {
+      "id": "014",
+      "city": "Москва",
+      "name": "Hotel-2",
+      "description": "",
+      "quantity": "двухместный",
+      "category": "стандарт",
+      "order": false,
+      "img": "https://via.placeholder.com/600x300/ADFF2F",
+      "price": 4000
+    },
+    {
+      "id": "015",
+      "city": "Москва",
+      "name": "Hotel-2",
+      "description": "",
+      "quantity": "двухместный",
+      "category": "люкс",
+      "order": false,
+      "img": "https://via.placeholder.com/600x300/2E8B57",
+      "price": 6000
+    },
+    {
+      "id": "016",
+      "city": "Москва",
+      "name": "Hotel-3",
+      "description": "",
+      "quantity": "двухместный",
+      "category": "эконом",
+      "order": false,
+      "img": "https://via.placeholder.com/600x300/FFF8DC",
+      "price": 2000
+    },
+    {
+      "id": "017",
+      "city": "Москва",
+      "name": "Hotel-3",
+      "description": "",
+      "quantity": "двухместный",
+      "category": "стандарт",
+      "order": false,
+      "img": "https://via.placeholder.com/600x300/ADFF2F",
+      "price": 4000
+    },
+    {
+      "id": "018",
+      "city": "Москва",
+      "name": "Hotel-3",
+      "description": "",
+      "quantity": "двухместный",
+      "category": "люкс",
+      "order": false,
+      "img": "https://via.placeholder.com/600x300/2E8B57",
+      "price": 6000
     }
   ]
 }

@@ -39,16 +39,13 @@ export const HotelPage = () => {
   }, []);
 
   const orderHotel = async () => {
-    await serverRequest(
-      OPERATION.FETCH_CHANGE_DATA_USER,
-      login,
-      userId,
-      id,
-    ).then(({ error, response }) => {
-      if (!error) {
-        dispatch(setOrderedHotels(response));
-      }
-    });
+    await serverRequest(OPERATION.FETCH_ORDER_HOTEL, login, userId, id).then(
+      ({ error, response }) => {
+        if (!error) {
+          dispatch(setOrderedHotels(response));
+        }
+      },
+    );
   };
 
   return (
