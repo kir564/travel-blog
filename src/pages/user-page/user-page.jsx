@@ -11,7 +11,7 @@ import {
 import styled from 'styled-components';
 import { useServerRequest } from '../../hooks';
 import { OPERATION } from '../../constants';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { setOrderedHotels } from '../../actions';
 
 const Wrapper = styled.div``;
@@ -24,15 +24,24 @@ export const UserPage = () => {
 
   const serverRequest = useServerRequest();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    Promise.all(
-      orderedHotels.map(({ id }) => serverRequest(OPERATION.FETCH_HOTEL, id)),
-    ).then((data) => {
-      const loadedHotels = data.map(({ response }) => response);
-      setHotels(loadedHotels || []);
-    });
+    if (!login) {
+      navigate('/');
+    } else {
+      Promise.all(
+        orderedHotels.map(({ id }) => serverRequest(OPERATION.FETCH_HOTEL, id)),
+      ).then((data) => {
+        const loadedHotels = data.map(({ response }) => response);
+        setHotels(loadedHotels || []);
+      });
+    }
   }, [orderedHotels]);
+
+  if (!login) {
+    return null;
+  }
 
   const getNameHotel = (hotelId) =>
     hotels.find(({ id }) => id === hotelId).name;
