@@ -1,4 +1,4 @@
-import { Button, CustomSelect, Input } from '../../components';
+import { Button, CustomSelect, Input, Loader } from '../../components';
 import { BlockWrapper } from '../../containers';
 import { CardHotel } from './components';
 import { IoSearchSharp } from 'react-icons/io5';
@@ -56,6 +56,7 @@ export const HomePage = () => {
   });
 
   const [hotels, setHotels] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const [requestError, setRequestError] = useState(null);
 
@@ -74,16 +75,19 @@ export const HomePage = () => {
       }
     }
 
+    setLoading(true);
     serverRequest(OPERATION.FETCH_HOTELS, data).then(({ error, response }) => {
       if (error) {
         setRequestError(error);
       }
       setHotels(response || []);
+      setLoading(false);
     });
   };
 
   return (
     <Wrapper>
+      {loading && <Loader />}
       <BlockWrapper>
         <Buttons>
           <Button>
