@@ -1,7 +1,7 @@
 import { setOrderedHotels } from '../../actions';
 import { OPERATION } from '../../constants';
 
-import { Button, ButtonsBlock } from '../../components';
+import { Button, ButtonsBlock, CommentForm } from '../../components';
 import { BlockWrapper } from '../../containers';
 import { DetailCardHotel } from './components/detail-card-hotel';
 import { useParams } from 'react-router-dom';
@@ -69,10 +69,21 @@ export const HotelPage = () => {
         {hotel && <DetailCardHotel hotel={hotel} />}
       </BlockWrapper>
       {login && (
-        <BlockWrapper>
-          <Button onClick={orderHotel}>Забронировать</Button>
-        </BlockWrapper>
+        <>
+          <BlockWrapper>
+            <Button onClick={orderHotel}>Забронировать</Button>
+          </BlockWrapper>
+          <CommentForm
+            setComments={setComments}
+            title="отзыв"
+            placeholder="Написать отзыв"
+            operation={OPERATION.WRITE_FEEDBACK}
+            user={login}
+            hotelId={id}
+          />
+        </>
       )}
+
       {comments.map(({ id, text }) => (
         <p key={id} style={{ border: '1px solid black', padding: '1rem' }}>
           {text}

@@ -6,3 +6,4 @@ export * from './fetch-cancel-order-hotel';
 export * from './fetch-hotel-comments';
 export * from './fetch-hotels';
 export * from './fetch-hotel';
+export * from './write-feedback';

@@ -15,6 +15,7 @@ export const useServerRequest = () => {
       OPERATION.FETCH_ORDER_HOTEL,
       OPERATION.FETCH_CANCEL_ORDER_HOTEL,
       OPERATION.FETCH_HOTEL_COMMENTS,
+      OPERATION.WRITE_FEEDBACK,
     ].includes(operation)
       ? params
       : [hash, ...params];

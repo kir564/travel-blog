@@ -1,3 +1,4 @@
+export * from './add-feedback';
 export * from './add-session';
 export * from './add-user';
 export * from './delete-session';
