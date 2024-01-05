@@ -7,3 +7,5 @@ export * from './fetch-hotel-comments';
 export * from './fetch-hotels';
 export * from './fetch-hotel';
 export * from './write-feedback';
+export * from './remove-hotel-comment';
+export * from './update-hotel-comment';

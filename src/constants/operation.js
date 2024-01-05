@@ -9,4 +9,6 @@ export const OPERATION = {
   FETCH_CANCEL_ORDER_HOTEL: 'fetchCancelOrderHotel',
   WRITE_COMMENT: 'writeComment',
   WRITE_FEEDBACK: 'writeFeedback',
+  REMOVE_HOTEL_COMMENT: 'removeHotelComment',
+  UPDATE_HOTEL_COMMENT: 'updateHotelComment',
 };

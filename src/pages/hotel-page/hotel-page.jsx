@@ -1,7 +1,7 @@
-import { setOrderedHotels } from '../../actions';
+import { setCommentsAction, setOrderedHotels } from '../../actions';
 import { OPERATION } from '../../constants';
 
-import { Button, ButtonsBlock, CommentForm } from '../../components';
+import { Button, ButtonsBlock, Comments, CommentForm } from '../../components';
 import { BlockWrapper } from '../../containers';
 import { DetailCardHotel } from './components/detail-card-hotel';
 import { useParams } from 'react-router-dom';
@@ -22,7 +22,6 @@ const ErrorMessage = styled.p`
 export const HotelPage = () => {
   const { id } = useParams();
   const [hotel, setHotel] = useState(null);
-  const [comments, setComments] = useState([]);
   const [requestError, setRequestError] = useState(null);
   const serverRequest = useServerRequest();
   const login = useSelector(selectUserLogin);
@@ -42,7 +41,7 @@ export const HotelPage = () => {
         setRequestError(error);
       } else {
         setHotel(responseHotel.response);
-        setComments(responseComments.response);
+        dispatch(setCommentsAction(responseComments.response));
       }
     };
 
@@ -74,7 +73,6 @@ export const HotelPage = () => {
             <Button onClick={orderHotel}>Забронировать</Button>
           </BlockWrapper>
           <CommentForm
-            setComments={setComments}
             title="отзыв"
             placeholder="Написать отзыв"
             operation={OPERATION.WRITE_FEEDBACK}
@@ -83,12 +81,7 @@ export const HotelPage = () => {
           />
         </>
       )}
-
-      {comments.map(({ id, text }) => (
-        <p key={id} style={{ border: '1px solid black', padding: '1rem' }}>
-          {text}
-        </p>
-      ))}
+      <Comments isHotel />
     </Wrapper>
   );
 };
