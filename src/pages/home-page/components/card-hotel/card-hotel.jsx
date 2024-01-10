@@ -2,6 +2,8 @@ import { STYLES } from '../../../../constants';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useState } from 'react';
+import { Loader } from '../../../../components';
 
 const CardWrapper = styled(Link)`
   background-color: ${({ theme }) => theme.color.base};
@@ -11,6 +13,15 @@ const CardWrapper = styled(Link)`
   overflow: hidden;
   object-fit: cover;
   object-position: center;
+`;
+
+const CardImageWrapper = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  width: 100%;
 `;
 
 const CardImage = styled.img`
@@ -41,9 +52,19 @@ const CardItem = styled.li`
 `;
 
 export const CardHotel = ({ hotel }) => {
+  const [isLoadImage, setIsLoadImage] = useState(false);
+
   return (
     <CardWrapper to={`/hotels/${hotel.id}`}>
-      <CardImage src={hotel.img} />
+      <CardImageWrapper>
+        {!isLoadImage && <Loader />}
+        <CardImage
+          src={hotel.img}
+          onLoad={() => {
+            setIsLoadImage(true);
+          }}
+        />
+      </CardImageWrapper>
       <CardBody>
         <CardTitle>{hotel.name}</CardTitle>
         <CardList>

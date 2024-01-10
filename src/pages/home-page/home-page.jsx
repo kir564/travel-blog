@@ -64,6 +64,8 @@ export const HomePage = () => {
 
   const onSubmit = (formData) => {
     setRequestError(null);
+    setHotels([]);
+    reset();
 
     const data = {};
 

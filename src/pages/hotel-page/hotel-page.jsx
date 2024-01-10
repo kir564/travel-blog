@@ -1,7 +1,13 @@
 import { setCommentsAction, setOrderedHotels } from '../../actions';
 import { OPERATION } from '../../constants';
 
-import { Button, ButtonsBlock, Comments, CommentForm } from '../../components';
+import {
+  Button,
+  ButtonsBlock,
+  Comments,
+  CommentForm,
+  Loader,
+} from '../../components';
 import { BlockWrapper } from '../../containers';
 import { DetailCardHotel } from './components/detail-card-hotel';
 import { useParams } from 'react-router-dom';
@@ -22,6 +28,7 @@ const ErrorMessage = styled.p`
 export const HotelPage = () => {
   const { id } = useParams();
   const [hotel, setHotel] = useState(null);
+  const [isLoad, setIsLoad] = useState(false);
   const [requestError, setRequestError] = useState(null);
   const serverRequest = useServerRequest();
   const login = useSelector(selectUserLogin);
@@ -30,10 +37,12 @@ export const HotelPage = () => {
 
   useEffect(() => {
     const request = async () => {
+      setIsLoad(true);
       const [responseHotel, responseComments] = await Promise.all([
         serverRequest(OPERATION.FETCH_HOTEL, id),
         serverRequest(OPERATION.FETCH_HOTEL_COMMENTS, id),
       ]);
+      setIsLoad(false);
 
       const error = responseHotel.error || responseComments.error;
 
@@ -46,6 +55,7 @@ export const HotelPage = () => {
     };
 
     request();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const orderHotel = async () => {
@@ -63,11 +73,12 @@ export const HotelPage = () => {
       <BlockWrapper>
         <ButtonsBlock />
       </BlockWrapper>
+      {isLoad && <Loader />}
       <BlockWrapper>
         {requestError && <ErrorMessage>{requestError}</ErrorMessage>}
         {hotel && <DetailCardHotel hotel={hotel} />}
       </BlockWrapper>
-      {login && (
+      {hotel && login && (
         <>
           <BlockWrapper>
             <Button onClick={orderHotel}>Забронировать</Button>
@@ -81,7 +92,7 @@ export const HotelPage = () => {
           />
         </>
       )}
-      <Comments isHotel />
+      {hotel && <Comments isHotel />}
     </Wrapper>
   );
 };
