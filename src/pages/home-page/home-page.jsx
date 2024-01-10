@@ -2,7 +2,7 @@ import { Button, CustomSelect, Input, Loader } from '../../components';
 import { BlockWrapper } from '../../containers';
 import { CardHotel } from './components';
 import { IoSearchSharp } from 'react-icons/io5';
-
+import InfiniteScroll from 'react-infinite-scroll-component';
 import { Link } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import { PATH, OPERATION, DEVICE } from '../../constants';
@@ -13,6 +13,11 @@ import { categoryOptions, quantityOptions } from './constants/select-options';
 import { useServerRequest } from '../../hooks';
 import { useState } from 'react';
 import { transformHotel } from '../../transforms';
+import { useDispatch, useSelector } from 'react-redux';
+import { setHotelAction, resetHotelAction } from '../../actions';
+import { selectHotels, selectHotelsTotal } from '../../selectors';
+
+import { RotatingLines } from 'react-loader-spinner';
 
 const Wrapper = styled.div``;
 
@@ -21,6 +26,7 @@ const CardListWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 2.2rem;
+  /* overflow: hidden !important; */
 
   @media (${DEVICE.SMALL}) {
     grid-template-columns: repeat(auto-fill, minmax(220px, 330px));
@@ -45,7 +51,7 @@ export const HomePage = () => {
     handleSubmit,
     reset,
     control,
-    formState: { errors },
+    // formState: { errors },
   } = useForm({
     defaultValues: {
       city: 'Москва',
@@ -55,17 +61,23 @@ export const HomePage = () => {
     // resolver: yupResolver(searchHotelSchema),
   });
 
-  const [hotels, setHotels] = useState([]);
+  const hotels = useSelector(selectHotels);
+  const total = useSelector(selectHotelsTotal);
   const [loading, setLoading] = useState(false);
-
+  const [formData, setFormData] = useState(null);
   const [requestError, setRequestError] = useState(null);
+  const [page, setPage] = useState(1);
 
   const serverRequest = useServerRequest();
+  const dispatch = useDispatch();
 
   const onSubmit = (formData) => {
+    // let currentPage = page
+
     setRequestError(null);
-    setHotels([]);
+    setPage(1);
     reset();
+    dispatch(resetHotelAction());
 
     const data = {};
 
@@ -77,14 +89,36 @@ export const HomePage = () => {
       }
     }
 
+    setFormData(data);
+
     setLoading(true);
-    serverRequest(OPERATION.FETCH_HOTELS, data).then(({ error, response }) => {
-      if (error) {
-        setRequestError(error);
-      }
-      setHotels(response || []);
-      setLoading(false);
-    });
+    serverRequest(OPERATION.FETCH_HOTELS, data, 1).then(
+      ({ error, response }) => {
+        if (error) {
+          setRequestError(error);
+        }
+        dispatch(setHotelAction(response));
+        setLoading(false);
+      },
+    );
+  };
+
+  const onScroll = (page) => {
+    serverRequest(OPERATION.FETCH_HOTELS, formData, page).then(
+      ({ error, response }) => {
+        console.log('response: ', response);
+        if (error) {
+          setRequestError(error);
+        } else {
+          dispatch(
+            setHotelAction({
+              hotels: [...hotels, ...response.hotels],
+              total: response.total,
+            }),
+          );
+        }
+      },
+    );
   };
 
   return (
@@ -143,11 +177,21 @@ export const HomePage = () => {
           </SearchHotelForm>
         </BlockWrapper>
         {requestError && <ErrorMessage>{requestError}</ErrorMessage>}
-        <CardListWrapper>
-          {hotels.map((hotel) => (
-            <CardHotel key={hotel.id} hotel={transformHotel(hotel)} />
-          ))}
-        </CardListWrapper>
+        <InfiniteScroll
+          dataLength={hotels.length}
+          next={() => {
+            setPage(page + 1);
+            onScroll(page + 1);
+          }}
+          hasMore={total > hotels.length}
+          // loader={<RotatingLines />}
+        >
+          <CardListWrapper>
+            {hotels.map((hotel) => (
+              <CardHotel key={hotel.id} hotel={transformHotel(hotel)} />
+            ))}
+          </CardListWrapper>
+        </InfiniteScroll>
       </BlockWrapper>
     </Wrapper>
   );

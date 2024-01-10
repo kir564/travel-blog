@@ -1,9 +1,9 @@
 import { getHotels } from '../api';
 
-export const fetchHotels = async (formData) => {
-  const hotels = await getHotels(formData);
+export const fetchHotels = async (formData, page) => {
+  const response = await getHotels(formData, page);
 
-  if (!hotels.length) {
+  if (!response.hotels.length) {
     return {
       error: 'Отели не найдены.',
       response: null,
@@ -12,6 +12,6 @@ export const fetchHotels = async (formData) => {
 
   return {
     error: null,
-    response: hotels,
+    response,
   };
 };

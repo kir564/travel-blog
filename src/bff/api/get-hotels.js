@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { URL_DB } from '../configs';
 
-export const getHotels = async ({ city, category, quantity }) => {
-  console.log(city, category, quantity);
+export const getHotels = async ({ city, category, quantity }, page = 1) => {
+  console.log('page: ', page);
+
   return axios({
     url: URL_DB.HOTELS,
     method: 'get',
@@ -10,9 +11,16 @@ export const getHotels = async ({ city, category, quantity }) => {
       city: city || null,
       category: category || null,
       quantity: quantity || null,
+      _page: page,
+      _limit: 8,
     },
   })
-    .then(({ data }) => data)
+    .then((response) => {
+      return {
+        hotels: response.data,
+        total: response.headers['x-total-count'],
+      };
+    })
     .catch((error) => {
       console.log(error.toJSON());
     });
